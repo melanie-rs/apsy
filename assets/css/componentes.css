@@ -1,0 +1,218 @@
+/* =====================================================================
+   assets/css/componentes.css
+   Componentes reutilizables de los módulos: buscador, tabla, paginación,
+   botones de ícono y ventanas modales.
+   ===================================================================== */
+
+/* ---- Barra de herramientas (buscador + contador) ---------------------- */
+.herramientas { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 16px; }
+.herramientas__total { font-size: 12px; color: var(--color-texto-suave); }
+
+.buscador { position: relative; width: 380px; max-width: 100%; color: var(--color-texto-suave); }
+.buscador .icono { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+
+.buscador input {
+    width: 100%; height: 42px; padding: 0 12px 0 39px;
+    background: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    font-size: 13px; color: var(--color-texto);
+}
+
+.buscador input::placeholder { color: var(--color-texto-suave); }
+.buscador input:focus { outline: none; border-color: var(--color-primario); box-shadow: 0 0 0 3px rgba(112, 44, 59, .12); }
+
+/* ---- Tabla ------------------------------------------------------------- */
+.tabla-tarjeta {
+    background: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-grande);
+    overflow: hidden;
+}
+
+.tabla { width: 100%; border-collapse: collapse; table-layout: fixed; }
+
+.tabla th {
+    height: 42px; padding: 0 20px;
+    background: var(--color-encabezado-tabla);
+    font-size: 11px; font-weight: 400; text-align: left;
+    color: var(--color-texto-suave);
+}
+
+.tabla td {
+    height: 56px; padding: 0 20px;
+    border-bottom: 1px solid var(--color-borde);
+    font-size: 12px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+.tabla .tabla__acciones { width: 112px; }
+
+.tabla td.tabla__vacio {
+    height: 120px; text-align: center; white-space: normal;
+    color: var(--color-texto-suave);
+}
+
+.tabla__vacio .icono { display: inline-block; vertical-align: -3px; margin-right: 6px; }
+
+.acciones { display: flex; align-items: center; gap: 5px; margin-left: -6px; }
+
+.boton-icono {
+    display: flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px;
+    background: none; border: 0; border-radius: 6px;
+    color: var(--color-texto-suave);
+    transition: background-color .15s, color .15s;
+}
+
+.boton-icono:hover { background: var(--color-fondo); color: var(--color-error); }
+.boton-icono--editar { color: var(--color-primario); }
+.boton-icono--editar:hover { color: var(--color-primario); }
+
+/* ---- Pie de tabla con paginación -------------------------------------- */
+.tabla-pie {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    min-height: 48px; padding: 0 20px;
+    font-size: 11px; color: var(--color-texto-suave);
+}
+
+.paginas { display: flex; align-items: center; gap: 16px; }
+.paginas__actual { font-weight: 600; color: var(--color-primario); }
+.paginas__flecha { display: flex; padding: 4px; margin: -4px; border-radius: 6px; }
+a.paginas__flecha:hover { background: var(--color-fondo); color: var(--color-primario); }
+.paginas__flecha--inactiva { opacity: .35; }
+
+/* ---- Ventanas modales (elemento <dialog>) ----------------------------- */
+.modal {
+    width: min(620px, calc(100% - 32px));
+    max-height: calc(100% - 32px);
+    padding: 0;
+    background: var(--color-superficie);
+    color: var(--color-texto);
+    border: 1px solid var(--color-borde);
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(77, 31, 42, .05);
+}
+
+.modal--chico { width: min(470px, calc(100% - 32px)); }
+.modal--ancho { width: min(960px, calc(100% - 32px)); }
+
+.modal::backdrop { background: rgba(48, 44, 46, .55); }
+
+body:has(dialog[open]) { overflow: hidden; }       /* no se mueve la página de fondo */
+
+.modal__cuerpo { display: flex; flex-direction: column; gap: 20px; padding: 24px; }
+
+.modal__encabezado { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.modal__encabezado h2 { margin-bottom: 5px; font-size: 18px; font-weight: 600; }
+.modal__encabezado p { font-size: 12px; color: var(--color-texto-suave); }
+
+.modal__cerrar {
+    display: flex; padding: 6px; margin: -6px;
+    background: none; border: 0; border-radius: 6px;
+    color: var(--color-texto-suave);
+}
+
+.modal__cerrar:hover { color: var(--color-texto); background: var(--color-fondo); }
+
+.modal__fila { display: flex; gap: 16px; }
+.modal__fila > .campo { flex: 1; min-width: 0; }
+
+.modal__nota { font-size: 10px; color: var(--color-texto-suave); }
+
+.modal__acciones { display: flex; justify-content: flex-end; gap: 10px; padding-top: 8px; }
+
+.modal__aviso {
+    display: flex; align-items: center; justify-content: center;
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    background: var(--color-error-fondo);
+    color: var(--color-error);
+}
+
+.modal__detalle { font-size: 13px; color: var(--color-texto-suave); }
+
+/* ---- Celular: la tabla se convierte en tarjetas ------------------------ */
+@media (max-width: 700px) {
+    .buscador { width: 100%; }
+    .filtros .campo { flex-basis: 100%; }
+    .filtros .boton { width: 100%; }
+    .resumen-fecha { flex-direction: column; align-items: flex-start; gap: 2px; }
+    .modal__pie { flex-direction: column; align-items: stretch; }
+
+    /* El encabezado se oculta visualmente pero sigue disponible para lectores de pantalla */
+    .tabla thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+    .tabla, .tabla tbody, .tabla tr, .tabla td { display: block; width: 100%; }
+
+    .tabla tr { padding: 12px 16px; border-bottom: 1px solid var(--color-borde); }
+
+    .tabla td {
+        display: flex; gap: 12px;
+        height: auto; padding: 3px 0;
+        border: 0;
+        white-space: normal;
+    }
+
+    /* Cada dato lleva su rótulo, tomado del atributo data-label */
+    .tabla td::before { content: attr(data-label); flex: 0 0 78px; font-size: 11px; padding-top: 1px; color: var(--color-texto-suave); }
+
+    .tabla .tabla__acciones { width: 100%; padding-top: 6px; }
+    .tabla td.tabla__vacio { display: block; padding: 32px 16px; }
+    .tabla td.tabla__vacio::before { display: none; }
+
+    .modal__cuerpo { padding: 20px 16px; }
+    .modal__fila { flex-direction: column; }
+    .modal__pie .modal__acciones { justify-content: stretch; }
+    .modal__acciones .boton { flex: 1; }
+}
+
+/* ---- Tarjeta informativa de color suave -------------------------------- */
+.aviso-suave {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 18px;
+    padding: 26px;
+    background: var(--color-primario-suave);
+    border-radius: var(--radio-grande);
+    color: var(--color-primario);
+}
+
+.aviso-suave h2 { font-size: 20px; font-weight: 400; line-height: 1.45; color: var(--color-primario-oscuro); }
+.aviso-suave p { font-size: 13px; }
+.aviso-suave__consejo { display: flex; align-items: center; gap: 8px; font-size: 11px !important; }
+
+/* ---- Etapa 5 (Turnos) -------------------------------------------------- */
+
+/* Filtros de la agenda */
+.filtros { display: flex; align-items: flex-end; flex-wrap: wrap; gap: 16px; }
+.filtros .campo { flex: 1 1 200px; min-width: 0; }
+
+/* Fecha del día y cantidad de turnos */
+.resumen-fecha { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; }
+.resumen-fecha h2 { font-size: 14px; font-weight: 600; }
+.resumen-fecha p { font-size: 12px; color: var(--color-texto-suave); }
+
+.tabla .col-hora { width: 80px; }
+.tabla .col-estado { width: 150px; }
+
+/* Indicador de estado ("píldora" con punto) */
+.badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    height: 26px; padding: 0 10px;
+    border-radius: 100px;
+    font-size: 11px; line-height: 1;
+}
+
+.badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+.badge--confirmado { background: var(--color-ok-fondo); color: var(--color-ok-texto); }
+.badge--pendiente  { background: var(--color-pendiente-fondo); color: var(--color-pendiente-texto); }
+.badge--cancelado  { background: var(--color-error-fondo); color: var(--color-error); }
+.badge--completado { background: #F1EEEF; color: var(--color-texto-suave); }
+
+/* Pie del formulario de turno: aviso de disponibilidad + botones */
+.modal__pie { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.modal__pie .modal__acciones { padding-top: 0; }
+
+.disponibilidad { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--color-texto-suave); }
+.disponibilidad--ok { color: var(--color-ok-texto); }
+.disponibilidad--error { color: var(--color-error); }
