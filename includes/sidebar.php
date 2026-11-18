@@ -32,13 +32,6 @@ $menu = [
     </nav>
 
     <div class="sidebar__cuenta">
-        <div class="salon">
-            <?= icono('store', 20) ?>
-            <div>
-                <p class="salon__nombre">Estudio Apsy</p>
-                <p class="salon__ciudad">Córdoba</p>
-            </div>
-        </div>
         <a class="cerrar-sesion" href="logout.php">
             <?= icono('log-out', 18) ?>
             <span>Cerrar sesión</span>
