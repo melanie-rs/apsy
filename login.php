@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Panel derecho: formulario -->
     <section class="login__acceso">
-        <p class="login__ayuda">¿Necesitás ayuda? <a href="#">Contactanos</a></p>
+        <p class="login__ayuda">¿Necesitás ayuda? <a href="contacto.php">Contactanos</a></p>
 
         <form class="login__formulario" method="post" action="login.php" novalidate>
             <div class="login__bienvenida">
@@ -144,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 Ingresar <?= icono('arrow-right', 17) ?>
             </button>
 
-            <a class="login__recuperar" href="#">¿Te olvidaste la contraseña?</a>
+            <a class="login__recuperar" href="recuperar.php">¿Te olvidaste la contraseña?</a>
         </form>
 
         <p class="login__pie">© <?= date('Y') ?> Apsy · Todo tu salón, en un solo lugar.</p>
